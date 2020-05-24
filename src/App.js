@@ -12,13 +12,16 @@ class App extends Component {
 
   async loadBlockchainData() {
     const web3= new Web3(Web3.givenProvider || 'http://localhost:8545');
-    const network = await web3.eth.net.getNetworkType()
+    //const network = await web3.eth.net.getNetworkType()
     const accounts= await web3.eth.getAccounts()
     this.setState({account:accounts[0]})
     console.log("account :"+ accounts[0]) 
-    const todoList=await web3.eth.Contract(abi, address)
+    const todoList=new web3.eth.Contract(abi, address)
+    console.log("account :"+ accounts[0]) 
     this.setState({todoList})
     const taskCount= await todoList.methods.taskCount().call()
+
+    console.log("account :"+ accounts[0]) 
     this.setState({taskCount})
     for (var i=1; i<=taskCount; i++){
       const task= await todoList.methods.tasks(i).call()
@@ -50,7 +53,7 @@ class App extends Component {
       this.componentDidMount()
     })
   }
-
+1
   render() {
     return (
       <div>
